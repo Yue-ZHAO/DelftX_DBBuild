@@ -65,7 +65,8 @@
     * Uncompressing all the metadata of the courses and putting them into ```root``` folder
 
 3. Editting course folder path in ```main.py```
-4. Running the code by ```python main.py```
+4. Editting database info in each ```.py``` files
+5. Running the code by ```python main.py```
 
 # Others
 
