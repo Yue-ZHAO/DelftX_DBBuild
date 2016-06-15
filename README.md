@@ -92,7 +92,7 @@ The initial schema of moocdb consists of four modules, which are Observing, Subm
 
 ### 2.2 Our current schema
 
-Our current schema mainly consists of four modules, which are named as Observations, Submissions, Collaborations and UserModes. 
+Our current schema is mainly based on the moocdb project. It consists of four modules, which are named as Observations, Submissions, Collaborations and UserModes. 
 
 ![Alt](./MOOCdb_Data_Model.png "Title")
 
