@@ -1,6 +1,30 @@
-# 1. Database Building
+# Building Database for Courses Data of MOOCs (EDX)
 
-## 1.1 Installing MySQL
+<link rel="stylesheet" href="http://yandex.st/highlightjs/6.2/styles/googlecode.min.css">
+ 
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="http://yandex.st/highlightjs/6.2/highlight.min.js"></script>
+ 
+<script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+ $(document).ready(function(){
+      $("h2,h3,h4,h5,h6").each(function(i,item){
+        var tag = $(item).get(0).localName;
+        $(item).attr("id","wow"+i);
+        $("#category").append('<a class="new'+tag+'" href="#wow'+i+'">'+$(this).text()+'</a></br>');
+        $(".newh2").css("margin-left",0);
+        $(".newh3").css("margin-left",20);
+        $(".newh4").css("margin-left",40);
+        $(".newh5").css("margin-left",60);
+        $(".newh6").css("margin-left",80);
+      });
+ });
+</script>
+<div id="category"></div>
+
+## 1. Database Building
+
+### 1.1 Installing MySQL
 
 1. Downloading [MySQL Community Server](http://dev.mysql.com/downloads/mysql/)
 
@@ -32,7 +56,7 @@
 8. Installing Connector/Python by ```sudo pip install mysql-connector-repackaged```
     * Checking if the package installed by using ```import mysql.connector``` 
 
-## 1.2 Building the database
+### 1.2 Building the database
 
 1. Create database ```<database name>```
     * Login MySQL ```mysql -uroot -p```
@@ -44,7 +68,7 @@
     * Selecting Data Import in MANAGEMENT
     * Importing self-contained file ```moocdb.sql``` in Schema ```<database name>``` with Dump Structure Only
 
-## 1.3 Reading course data into the the database
+### 1.3 Reading course data into the the database
 
 1. Changing the mode of MySQL to non-strict, otherwise ```null``` cannot be added into integer columns in some tables
     * mkdir ```mysql``` in folder ```/etc```
@@ -76,19 +100,19 @@
 4. Editting database info in each ```.py``` files
 5. Running the code by ```python main.py```
 
-## 1.4 Others
+### 1.4 Others
 
 These codes are test on EX101x-3T2015 and FP101x-3T2015.
 
-# 2. Relations with The Moocdb Project
+## 2. Relations with The Moocdb Project
 
-## 2.1 The Moocdb Project
+### 2.1 The Moocdb Project
 
 [The MOOCdb Project](moocdb.csail.mit.edu) is an open source framework, which sets a shared data model standard for organzing data generated from MOOCs.
 
 The initial schema of moocdb consists of four modules, which are Observing, Submitting, Collaborating and Feedback.
 
-## 2.2 Our current schema
+### 2.2 Our current schema
 
 Our current schema mainly consists of four modules, which are named as Observations, Submissions, Collaborations and UserModes. 
 
@@ -96,25 +120,25 @@ Our current schema mainly consists of four modules, which are named as Observati
 
 As shown in Figure 1, each module in our schema has several tables of information. The differences between our current schema and the initial moocdb schema are discussed in the following sections.
 
-## 2.3 Observing
+### 2.3 Observing
 
 In original Moocdb schema, Observing mode has five tables, which are observed_event, resources, resources_urls, resources_types and urls. 
 
 In our current schema, we merge them into two tables, named observations and resources. This two tables represent the observed events of students and relevant resouces to events.
 
-## 2.4 Submitting
+### 2.4 Submitting
 
 In original Moocdb schema, Submitting mode has four tables, which are problem_type, problems, submissions, and assessments. 
 
 In our current schema, we merge the problem table into problems table. After that, a table named quiz_sessions is added. quiz_sessions is leveraged to represent how users answer sessions of quiz.
 
-## 2.5 Collaborating
+### 2.5 Collaborating
 
 In original Moocdb schema, Collaborating mode has two tables, which are collaborations and collaboration_types. 
 
 In our current schema, the two original table collaborations and collaboration_types are combined into one table collaborations. forum_sessions is added as a new table, which represents users activities on forum.
 
-## 2.6 UserModes
+### 2.6 UserModes
 
 In our schema, we have another parts named user modes. which contains four tables named courses, global_user, course_user and user_pii.
 
