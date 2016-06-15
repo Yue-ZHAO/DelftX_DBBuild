@@ -1,4 +1,6 @@
-# 1. Installing MySQL
+# 1. Database Building
+
+## 1.1 Installing MySQL
 
 1. Downloading [MySQL Community Server](http://dev.mysql.com/downloads/mysql/)
 
@@ -9,6 +11,12 @@
 4. Setting PATH
     * Editting bash profile ```vim ~/.bash_profile```
     * Setting the path ```PATH=$PATH:/usr/local/mysql/bin```
+    * Adding this in bash file:
+    
+    ```
+    alias mysql=/usr/local/mysql/bin/mysql
+    alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+    ```
     * Saving the setting ```esc``` + ```:wq```
     * Sourcing bash profile ```source ~/.bash_profile```
 
@@ -24,7 +32,7 @@
 8. Installing Connector/Python by ```sudo pip install mysql-connector-repackaged```
     * Checking if the package installed by using ```import mysql.connector``` 
 
-# 2. Building the database
+## 1.2 Building the database
 
 1. Create database ```<database name>```
     * Login MySQL ```mysql -uroot -p```
@@ -36,7 +44,7 @@
     * Selecting Data Import in MANAGEMENT
     * Importing self-contained file ```moocdb.sql``` in Schema ```<database name>``` with Dump Structure Only
 
-# 3. Reading course data into the the database
+## 1.3 Reading course data into the the database
 
 1. Changing the mode of MySQL to non-strict, otherwise ```null``` cannot be added into integer columns in some tables
     * mkdir ```mysql``` in folder ```/etc```
@@ -68,6 +76,49 @@
 4. Editting database info in each ```.py``` files
 5. Running the code by ```python main.py```
 
-# Others
+## 1.4 Others
 
 These codes are test on EX101x-3T2015 and FP101x-3T2015.
+
+# 2. Relations with The Moocdb Project
+
+## 2.1 The Moocdb Project
+
+[The MOOCdb Project](moocdb.csail.mit.edu) is an open source framework, which sets a shared data model standard for organzing data generated from MOOCs.
+
+The initial schema of moocdb consists of four modules, which are Observing, Submitting, Collaborating and Feedback.
+
+## 2.2 Our current schema
+
+Our current schema mainly consists of four modules, which are named as Observations, Submissions, Collaborations and UserModes. 
+
+![Alt](./MOOCdb_Data_Model.png "Title")
+
+As shown in Figure 1, each module in our schema has several tables of information. The differences between our current schema and the initial moocdb schema are discussed in the following sections.
+
+## 2.3 Observing
+
+In original Moocdb schema, Observing mode has five tables, which are observed_event, resources, resources_urls, resources_types and urls. 
+
+In our current schema, we merge them into two tables, named observations and resources. This two tables represent the observed events of students and relevant resouces to events.
+
+## 2.4 Submitting
+
+In original Moocdb schema, Submitting mode has four tables, which are problem_type, problems, submissions, and assessments. 
+
+In our current schema, we merge the problem table into problems table. After that, a table named quiz_sessions is added. quiz_sessions is leveraged to represent how users answer sessions of quiz.
+
+## 2.5 Collaborating
+
+In original Moocdb schema, Collaborating mode has two tables, which are collaborations and collaboration_types. 
+
+In our current schema, the two original table collaborations and collaboration_types are combined into one table collaborations. forum_sessions is added as a new table, which represents users activities on forum.
+
+## 2.6 UserModes
+
+In our schema, we have another parts named user modes. which contains four tables named courses, global_user, course_user and user_pii.
+
+Table courses contains the metainfo of courses. Table global_user represent the relations between users and courses. Table course_user represent users' status and grade in courses. Table user_pii represent course users' demographic data. 
+
+
+
