@@ -11,8 +11,10 @@ import json
 
 ################# GENERAL DESCRIPTION  ####################
 #
-#  This script will..... bla bla bla -> YUE
-#
+#  This script will extract the daily logs of specific courses.
+#  In the output folder, each course has its own folder 
+#  which contains all the uncompressed and filtered daily logs 
+#  of the course.
 #
 ###########################################################
 
@@ -22,6 +24,9 @@ try:
     ################# CONFIG - START ####################
 
     # zip_files & unzip_files folder path
+    # Input folder is the zip folder which contains all the gzip daily logs
+    # Output folder is the the unzip folder which contains 
+
     unzip_folder_path = "./uncompressed/"
     zip_folder_path = "./alllogs/"
     # start and endates: only consider logfiles with the start and endrange. In order to be safe,
@@ -30,7 +35,9 @@ try:
     startdate = "2015-09-01"    # use "yyyy-mm-dd" format
     enddate = "2016-03-01"      # use "yyyy-mm-dd" format
     # provide the IDs of the courses you are interested in
-    courseids = [["EX101x","3T2015"], ["FP101x","3T2015"]] # each course id is an array of the old-sytle ID and a new style ID, e.g. ["EX101x","3T2015"]    YUE FIX THIS COMMENT LATER!!!!!!!!
+    courseids = [["EX101x","3T2015"], ["FP101x","3T2015"]] 
+    # each course id is an array of the course code and the course quarter, e.g. ["EX101x","3T2015"]
+    # the reason we seperate them to match the course id is that edx may change its data format some time
 
     ################# CONFIG - END ####################
 
