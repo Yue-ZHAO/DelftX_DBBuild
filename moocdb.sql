@@ -1,5 +1,5 @@
-DROP DATABASE IF EXISTS FP101x_3T2015;
-CREATE DATABASE FP101x_3T2015;
+DROP SCHEMA IF EXISTS FP101x_3T2015;
+CREATE SCHEMA FP101x_3T2015 CHARACTER SET `latin1`;
 
 USE FP101x_3T2015;
 
@@ -10,7 +10,7 @@ course_name varchar(255),
 course_start_time datetime,
 course_end_time datetime,
 PRIMARY KEY (course_id),
-KEY `index` (`course_id`)
+INDEX `index` (`course_id`)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS `user_pii`;
@@ -23,7 +23,7 @@ country varchar(255),
 email varchar(255),
 PRIMARY KEY (course_user_id),
 FOREIGN KEY (course_user_id) REFERENCES global_user(course_user_id),
-KEY `index` (`course_user_id`(50), `gender`, `year_of_birth`, `level_of_education`, `country`)
+INDEX `index` (`course_user_id`(50), `gender`, `year_of_birth`, `level_of_education`, `country`)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS `global_user`;
@@ -34,7 +34,7 @@ course_user_id varchar(255) NOT NULL,
 PRIMARY KEY (course_user_id),
 FOREIGN KEY (course_id) REFERENCES courses(course_id),
 FOREIGN KEY (global_user_id) REFERENCES user_pii(global_user_id),
-KEY `index` (`global_user_id`, `course_id`, `course_user_id`)
+INDEX `index` (`global_user_id`, `course_id`, `course_user_id`)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS `course_user`;
@@ -46,7 +46,7 @@ certificate_status varchar(255),
 register_time datetime,
 PRIMARY KEY (course_user_id),
 FOREIGN KEY (course_user_id) REFERENCES global_user(course_user_id),
-KEY `index` (`course_user_id`, `enrollment_mode`, `certificate_status`)
+INDEX `index` (`course_user_id`, `enrollment_mode`, `certificate_status`)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS `problems`;
@@ -55,7 +55,7 @@ problem_id varchar(255) NOT NULL,
 problem_type varchar(255),
 PRIMARY KEY (problem_id),
 FOREIGN KEY (problem_id) REFERENCES resources(resource_id),
-KEY `index` (`problem_id`, `problem_type`)
+INDEX `index` (`problem_id`, `problem_type`)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS `submissions`;
@@ -67,7 +67,7 @@ submission_timestamp datetime,
 PRIMARY KEY (submission_id),
 FOREIGN KEY (course_user_id) REFERENCES global_user(course_user_id),
 FOREIGN KEY (problem_id) REFERENCES resources(resource_id),
-KEY `index` (`submission_id`, `course_user_id`, `problem_id`)
+INDEX `index` (`submission_id`, `course_user_id`, `problem_id`)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS `assessments`;
@@ -79,7 +79,7 @@ grade float,
 PRIMARY KEY (assessment_id),
 FOREIGN KEY (course_user_id) REFERENCES global_user(course_user_id),
 FOREIGN KEY (assessment_id) REFERENCES submissions(submission_id),
-KEY `index` (`assessment_id`, `course_user_id`, `max_grade`, `grade`)
+INDEX `index` (`assessment_id`, `course_user_id`, `max_grade`, `grade`)
 ) ENGINE=MyISAM;
 
 
@@ -100,15 +100,13 @@ times_speedUp int,
 times_speedDown int,
 times_pause int,
 duration_pause double,
-
 start_time datetime,
 end_time datetime,
 
 PRIMARY KEY (observation_id),
 FOREIGN KEY (course_user_id) REFERENCES global_user(course_user_id),
 FOREIGN KEY (resource_id) REFERENCES resources(resource_id),
-
-KEY `index` (`observation_id`(50), `course_user_id`(50), `resource_id`(50))
+INDEX `index` (`observation_id`(50), `course_user_id`(50), `resource_id`(50))
 
 ) ENGINE=MyISAM;
 
@@ -120,7 +118,7 @@ relevant_week int,
 course_id varchar(255),
 PRIMARY KEY (resource_id),
 FOREIGN KEY (course_id) REFERENCES courses(course_id),
-KEY `index` (`resource_id`, `resource_type`, `relevant_week`, `course_id`)
+INDEX `index` (`resource_id`, `resource_type`, `relevant_week`, `course_id`)
 ) ENGINE=MyISAM;
 
 
@@ -137,7 +135,7 @@ collaboration_parent_id varchar(255),
 collaboration_thread_id varchar(255),
 PRIMARY KEY (collaboration_id),
 FOREIGN KEY (course_user_id) REFERENCES global_user(course_user_id),
-KEY `index` (`collaboration_id`, `course_user_id`, `collaboration_type`)
+INDEX `index` (`collaboration_id`, `course_user_id`, `collaboration_type`)
 ) ENGINE=MyISAM;
 
 
@@ -151,7 +149,7 @@ end_time datetime,
 duration int,
 PRIMARY KEY (session_id),
 FOREIGN KEY (course_user_id) REFERENCES global_user(course_user_id),
-KEY `index` (`session_id`, `course_user_id`)
+INDEX `index` (`session_id`, `course_user_id`)
 ) ENGINE=MyISAM;
 
 
@@ -165,7 +163,7 @@ end_time datetime,
 duration int,
 PRIMARY KEY (forum_session_id),
 FOREIGN KEY (course_user_id) REFERENCES global_user(course_user_id),
-KEY `index` (`forum_session_id`, `course_user_id`)
+INDEX `index` (`forum_session_id`, `course_user_id`)
 ) ENGINE=MyISAM;
 
 
@@ -178,7 +176,7 @@ end_time datetime,
 duration int,
 PRIMARY KEY (quiz_session_id),
 FOREIGN KEY (course_user_id) REFERENCES global_user(course_user_id),
-KEY `index` (`quiz_session_id`, `course_user_id`)
+INDEX `index` (`quiz_session_id`, `course_user_id`)
 ) ENGINE=MyISAM;
 
 
@@ -190,7 +188,7 @@ question_type varchar(255),
 description text,
 PRIMARY KEY (question_id),
 FOREIGN KEY (course_id) REFERENCES courses(course_id),
-KEY `index` (`question_id`, `course_id`, `question_type`)
+INDEX `index` (`question_id`, `course_id`, `question_type`)
 ) ENGINE=MyISAM;
 
 DROP TABLE IF EXISTS `survey_response`;
@@ -201,6 +199,5 @@ question_id varchar(255),
 answer text,
 PRIMARY KEY (response_id),
 FOREIGN KEY (course_user_id) REFERENCES global_user(course_user_id),
-KEY `index` (`response_id`, `course_user_id`, `question_id`)
+INDEX `index` (`response_id`, `course_user_id`, `question_id`)
 ) ENGINE=MyISAM;
-
