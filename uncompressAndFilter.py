@@ -27,12 +27,12 @@ try:
     # Input folder is the zip folder which contains all the gzip daily logs
     # Output folder is the the unzip folder which contains 
 
-    unzip_folder_path = "./uncompressed/"
-    zip_folder_path = "./alllogs/"
+    unzip_folder_path = "/Volumes/YuePassport/course_log/DailyEventLog3/"
+    zip_folder_path = "/Volumes/YuePassport/course_log/DailyEventLog3/"
     # start and endates: only consider logfiles with the start and endrange. In order to be safe,
     # just slect one month before the startdate of the first couse, and plus one month after
     # the enddate of the last course
-    startdate = "2015-09-01"    # use "yyyy-mm-dd" format
+    startdate = "2015-07-01"    # use "yyyy-mm-dd" format
     enddate = "2016-03-01"      # use "yyyy-mm-dd" format
     # provide the IDs of the courses you are interested in
     courseids = [["EX101x","3T2015"], ["FP101x","3T2015"]] 

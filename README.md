@@ -62,12 +62,11 @@
     * mkdir ```metadata``` under the folder ```unzip_files```, and put all the  files of metadata of the course into the folder ```metadata```
     * Put all the daily log files with ```.gz``` into ```zip_files```-->
     
-1. Preprocessing daily log files: (All of following steps will be coded into ```LogFileCleaning.py``` later)
-    * Checking the file whose name contains ```course_structure``` in the course metadata to get the course start time and the course end time;
-    * Uncompressing all the daily log files whose timestamps are from course start time to the course end time (*you can uncompress more daily logs around course time range. For example, two weeks before the course start and after the course end*).
-    * Editing ```Path``` of uncompressed course daily files in file ```LogFileCleaning.py```
-    * Editing ```course name``` in file ```LogFileCleaning.py``` for filtering the daily log files of specific course.
-    * ```python LogFileCleaning.py``` generating preprocessed daily log files
+1. Preprocessing daily log files:
+    * Editing ```Path``` of uncompressed course daily files in file ```uncompressAndFilter.py```
+    * Editing ```starttime``` and ```endtime``` of target course for processing dailylog files in file ```uncompressAndFilter.py```
+    * Editing ```course name``` in file ```uncompressAndFilter.py``` for filtering the daily log files of specific course.
+    * ```python uncompressAndFilter.py``` generating preprocessed daily log files
 
 2. All the daily logs and metadata of the course should be put into the same folder.
     * Making a folder for a course. For example, you can name it as ```FP101x_3T2015```
